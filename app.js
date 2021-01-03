@@ -10,7 +10,25 @@ const express = require("express");
 //
 const app = express();
 // we create the server
+
+//mongoose
+const mongoose = require("mongoose");
+
+const db = require("./config/dbConfig").mongoURI;
+
+mongoose
+  .connect(db)
+  .then(() => console.log("mongodb connected"))
+  .catch((err) => console.log(err));
+// will connect to mongodb
+// do we need the connection details for monogodb ?
+// based on this connection details we can connect to mongodb using
+// can we have config.js ==> to hold our application config details.
+// mongoose
+
 const users = require("./api/users");
+const profile = require("./api/profile");
+const posts = require("./api/posts");
 // do we need a port for communication?
 const port = 5000;
 app.listen(port, () => {
@@ -22,6 +40,8 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/users", users);
+app.use("/api/profile", profile);
+app.use("/api/posts", posts);
 
 // devconnector
 
