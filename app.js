@@ -11,6 +11,9 @@ const express = require("express");
 const app = express();
 // we create the server
 
+// apply body-parser
+const bodyParser = require("body-parser");
+
 //mongoose
 const mongoose = require("mongoose");
 
@@ -25,6 +28,9 @@ mongoose
 // based on this connection details we can connect to mongodb using
 // can we have config.js ==> to hold our application config details.
 // mongoose
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json()); // it will convert all ur req body contents to json object implicitly.
 
 const users = require("./api/users");
 const profile = require("./api/profile");
